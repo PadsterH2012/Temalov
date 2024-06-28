@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  rpg_database:
+    build: ./rpg_database
+    container_name: rpg_database
+    environment:
+      POSTGRES_DB: rpg
+      POSTGRES_USER: rpg_user
+      POSTGRES_PASSWORD: rpg_pass
+    ports:
+      - "5432:5432"
+  rpg_web_frontend:
+    build: ./rpg_web_frontend
+    container_name: rpg_web_frontend
+    volumes:
+      - ./shared:/usr/src/app/shared
+      - ./rpg_web_frontend/static:/usr/src/app/static
+      - ./rpg_web_frontend/templates:/usr/src/app/templates
+    ports:
+      - "5000:5000"
+  rpg_content_creator:
+    build: ./rpg_content_creator
+    container_name: rpg_content_creator
+    volumes:
+      - ./shared:/usr/src/app/shared
+    ports:
+      - "5001:5000"
+  rpg_content_api:
+    build: ./rpg_content_api
+    container_name: rpg_content_api
+    volumes:
+      - ./shared:/usr/src/app/shared
+    ports:
+      - "5002:5000"
