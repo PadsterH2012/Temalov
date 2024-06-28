@@ -1,13 +1,14 @@
+# project_root/rpg_content_creator/Dockerfile
+
 FROM python:3.9-slim
 
 WORKDIR /usr/src/app
 
-COPY project_root/rpg_content_creator/requirements.txt ./
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY project_root/rpg_content_creator ./
-COPY project_root/shared ./shared
+COPY . .
 
-EXPOSE 5000
+EXPOSE 8001
 
-CMD ["python", "app.py"]
+CMD ["python", "run.py"]

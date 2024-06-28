@@ -18,7 +18,9 @@ services:
       retries: 5
     ports:
       - "5432:5432"
-  
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
   rpg_web_frontend:
     build:
       context: ..
@@ -30,7 +32,7 @@ services:
         condition: service_healthy
     ports:
       - "5000:5000"
-  
+
   rpg_content_creator:
     build:
       context: ..
@@ -42,7 +44,7 @@ services:
         condition: service_healthy
     ports:
       - "8001:8001"
-  
+
   rpg_content_api:
     build:
       context: ..
