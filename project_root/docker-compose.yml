@@ -5,6 +5,7 @@ services:
     build:
       context: ..
       dockerfile: project_root/rpg_database/Dockerfile
+    image: padster2012/rpg_database:latest
     container_name: rpg_database
     environment:
       POSTGRES_DB: rpg
@@ -17,11 +18,10 @@ services:
     build:
       context: ..
       dockerfile: project_root/rpg_web_frontend/Dockerfile
+    image: padster2012/rpg_web_frontend:latest
     container_name: rpg_web_frontend
-    volumes:
-      - ./shared:/usr/src/app/shared
-      - ./rpg_web_frontend/static:/usr/src/app/static
-      - ./rpg_web_frontend/templates:/usr/src/app/templates
+    depends_on:
+      - rpg_database
     ports:
       - "5000:5000"
   
@@ -29,9 +29,10 @@ services:
     build:
       context: ..
       dockerfile: project_root/rpg_content_creator/Dockerfile
+    image: padster2012/rpg_content_creator:latest
     container_name: rpg_content_creator
-    volumes:
-      - ./shared:/usr/src/app/shared
+    depends_on:
+      - rpg_database
     ports:
       - "5001:5000"
   
@@ -39,8 +40,9 @@ services:
     build:
       context: ..
       dockerfile: project_root/rpg_content_api/Dockerfile
+    image: padster2012/rpg_content_api:latest
     container_name: rpg_content_api
-    volumes:
-      - ./shared:/usr/src/app/shared
+    depends_on:
+      - rpg_database
     ports:
       - "5002:5000"
