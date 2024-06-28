@@ -23,8 +23,8 @@ pipeline {
                     // Change to project-root directory
                     dir('project-root') {
                         // Build and push the Docker images using Docker Compose
-                        sh 'docker-compose  -f docker-compose-build.yml build'
-                        sh 'docker-compose  -f docker-compose-build.yml push'
+                        sh 'docker-compose  -f docker-compose.yml build'
+                        sh 'docker-compose  -f docker-compose.yml push'
                     }
 
                     // Log out from Docker Hub
