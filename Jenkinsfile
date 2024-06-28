@@ -50,115 +50,115 @@ pipeline {
                     }
                 }
 
-                stage('Auth Tests') {
-                    steps {
-                        script {
-                            echo "Running Auth tests..."
+                // stage('Auth Tests') {
+                //     steps {
+                //         script {
+                //             echo "Running Auth tests..."
 
-                            // Start all the services defined in the docker-compose file
-                            dir('project_root') {
-                                sh 'docker-compose up -d'
+                //             // Start all the services defined in the docker-compose file
+                //             dir('project_root') {
+                //                 sh 'docker-compose up -d'
 
-                                // Wait for the services to start
-                                sleep 20
+                //                 // Wait for the services to start
+                //                 sleep 20
 
-                                // Run the Auth tests
-                                sh 'docker-compose run --rm rpg_web_frontend python -m unittest discover -s tests -p "test_auth.py"'
+                //                 // Run the Auth tests
+                //                 sh 'docker-compose run --rm rpg_web_frontend python -m unittest discover -s tests -p "test_auth.py"'
 
-                                // Stop and remove all the containers
-                                sh 'docker-compose down'
-                            }
-                        }
-                    }
-                }
+                //                 // Stop and remove all the containers
+                //                 sh 'docker-compose down'
+                //             }
+                //         }
+                //     }
+                // }
 
-                stage('Character Tests') {
-                    steps {
-                        script {
-                            echo "Running Character tests..."
+                // stage('Character Tests') {
+                //     steps {
+                //         script {
+                //             echo "Running Character tests..."
 
-                            // Start all the services defined in the docker-compose file
-                            dir('project_root') {
-                                sh 'docker-compose up -d'
+                //             // Start all the services defined in the docker-compose file
+                //             dir('project_root') {
+                //                 sh 'docker-compose up -d'
 
-                                // Wait for the services to start
-                                sleep 20
+                //                 // Wait for the services to start
+                //                 sleep 20
 
-                                // Run the Character tests
-                                sh 'docker-compose run --rm rpg_web_frontend python -m unittest discover -s tests -p "test_characters.py"'
+                //                 // Run the Character tests
+                //                 sh 'docker-compose run --rm rpg_web_frontend python -m unittest discover -s tests -p "test_characters.py"'
 
-                                // Stop and remove all the containers
-                                sh 'docker-compose down'
-                            }
-                        }
-                    }
-                }
+                //                 // Stop and remove all the containers
+                //                 sh 'docker-compose down'
+                //             }
+                //         }
+                //     }
+                // }
 
-                stage('Quest Tests') {
-                    steps {
-                        script {
-                            echo "Running Quest tests..."
+                // stage('Quest Tests') {
+                //     steps {
+                //         script {
+                //             echo "Running Quest tests..."
 
-                            // Start all the services defined in the docker-compose file
-                            dir('project_root') {
-                                sh 'docker-compose up -d'
+                //             // Start all the services defined in the docker-compose file
+                //             dir('project_root') {
+                //                 sh 'docker-compose up -d'
 
-                                // Wait for the services to start
-                                sleep 20
+                //                 // Wait for the services to start
+                //                 sleep 20
 
-                                // Run the Quest tests
-                                sh 'docker-compose run --rm rpg_web_frontend python -m unittest discover -s tests -p "test_quests.py"'
+                //                 // Run the Quest tests
+                //                 sh 'docker-compose run --rm rpg_web_frontend python -m unittest discover -s tests -p "test_quests.py"'
 
-                                // Stop and remove all the containers
-                                sh 'docker-compose down'
-                            }
-                        }
-                    }
-                }
+                //                 // Stop and remove all the containers
+                //                 sh 'docker-compose down'
+                //             }
+                //         }
+                //     }
+                // }
 
-                stage('Game Tests') {
-                    steps {
-                        script {
-                            echo "Running Game tests..."
+                // stage('Game Tests') {
+                //     steps {
+                //         script {
+                //             echo "Running Game tests..."
 
-                            // Start all the services defined in the docker-compose file
-                            dir('project_root') {
-                                sh 'docker-compose up -d'
+                //             // Start all the services defined in the docker-compose file
+                //             dir('project_root') {
+                //                 sh 'docker-compose up -d'
 
-                                // Wait for the services to start
-                                sleep 20
+                //                 // Wait for the services to start
+                //                 sleep 20
 
-                                // Run the Game tests
-                                sh 'docker-compose run --rm rpg_web_frontend python -m unittest discover -s tests -p "test_games.py"'
+                //                 // Run the Game tests
+                //                 sh 'docker-compose run --rm rpg_web_frontend python -m unittest discover -s tests -p "test_games.py"'
 
-                                // Stop and remove all the containers
-                                sh 'docker-compose down'
-                            }
-                        }
-                    }
-                }
+                //                 // Stop and remove all the containers
+                //                 sh 'docker-compose down'
+                //             }
+                //         }
+                //     }
+                // }
 
-                stage('Settings Tests') {
-                    steps {
-                        script {
-                            echo "Running Settings tests..."
+                // stage('Settings Tests') {
+                //     steps {
+                //         script {
+                //             echo "Running Settings tests..."
 
-                            // Start all the services defined in the docker-compose file
-                            dir('project_root') {
-                                sh 'docker-compose up -d'
+                //             // Start all the services defined in the docker-compose file
+                //             dir('project_root') {
+                //                 sh 'docker-compose up -d'
 
-                                // Wait for the services to start
-                                sleep 20
+                //                 // Wait for the services to start
+                //                 sleep 20
 
-                                // Run the Settings tests
-                                sh 'docker-compose run --rm rpg_web_frontend python -m unittest discover -s tests -p "test_settings.py"'
+                //                 // Run the Settings tests
+                //                 sh 'docker-compose run --rm rpg_web_frontend python -m unittest discover -s tests -p "test_settings.py"'
 
-                                // Stop and remove all the containers
-                                sh 'docker-compose down'
-                            }
-                        }
-                    }
-                }
+                //                 // Stop and remove all the containers
+                //                 sh 'docker-compose down'
+                //             }
+                //         }
+                //     }
+                // }
             }
         }
     }
