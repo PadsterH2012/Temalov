@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS  = credentials('dockerhub-credentials-id')
-        DOCKER_ HUB_REPO  = 'padster2012/temalov'
+        DOCKER_HUB_REPO  = 'padster2012/temalov'
     }
 
     stages {
@@ -30,36 +30,6 @@ pipeline {
                     // Log out from Docker Hub
                     sh 'docker logout'
                 }
-            }
-        }
-
-        stage('Log into Docker Hub') {
-            steps{
-                script   { echo "Logging into Docker Hub..." }
-            }
-        }
-
-        stage('Build the Database Image') {
-            steps{
-                script  { echo "Building database image..." }
-            }
-        }
-
-        stage('Build the Web Frontend Image') {
-            steps{
-                script  { echo "Building web frontend image..." }
-            }
-        }
-
-        stage('Build the Content Creator Image') {
-            steps{
-                script  { echo "Building content creator image..." }
-            }
-        }
-
-        stage('Build the Content API Image') {
-            steps{
-                script  { echo "Building content API image..." }
             }
         }
 
