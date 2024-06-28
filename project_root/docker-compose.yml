@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   rpg_database:
-    build: ./rpg_database
+    build:
+      context: ..
+      dockerfile: project_root/rpg_database/Dockerfile
     container_name: rpg_database
     environment:
       POSTGRES_DB: rpg
@@ -10,8 +12,11 @@ services:
       POSTGRES_PASSWORD: rpg_pass
     ports:
       - "5432:5432"
+  
   rpg_web_frontend:
-    build: ./rpg_web_frontend
+    build:
+      context: ..
+      dockerfile: project_root/rpg_web_frontend/Dockerfile
     container_name: rpg_web_frontend
     volumes:
       - ./shared:/usr/src/app/shared
@@ -19,15 +24,21 @@ services:
       - ./rpg_web_frontend/templates:/usr/src/app/templates
     ports:
       - "5000:5000"
+  
   rpg_content_creator:
-    build: ./rpg_content_creator
+    build:
+      context: ..
+      dockerfile: project_root/rpg_content_creator/Dockerfile
     container_name: rpg_content_creator
     volumes:
       - ./shared:/usr/src/app/shared
     ports:
       - "5001:5000"
+  
   rpg_content_api:
-    build: ./rpg_content_api
+    build:
+      context: ..
+      dockerfile: project_root/rpg_content_api/Dockerfile
     container_name: rpg_content_api
     volumes:
       - ./shared:/usr/src/app/shared
