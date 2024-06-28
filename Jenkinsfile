@@ -1,83 +1,121 @@
-pipeline {
+pipeline  {
+
     agent any
 
-    environment {
+    environment  {
         DOCKER_HUB_CREDENTIALS = credentials('dockerhub-credentials-id')
         DOCKER_HUB_REPO = 'padster2012/temalov'
-    }
+     }
 
-    stages {
-        stage('log into docker hub') {
+    stages  {
+
+        stage('Checkout Code')  {
+            steps {
+                // Checkout the repository
+                checkout scm
+            }
+         }
+
+        stage('Build and Push Images') {
             steps {
                 script {
                     // Log in to Docker Hub
                     sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+
+                    // Change to project-root directory
+                    dir('project-root') {
+                        // Build and push the Docker images using Docker Compose
+                        sh 'docker-compose -f docker-compose-build.yml build'
+                        sh 'docker-compose -f docker-compose-build.yml push'
                     }
-                }
-            }
-        }
-        stage('Build Database Image') {
-            steps {
-                script {
-                    sh "docker build -t ${DOCKER_HUB_REPO}:rpg_database ./rpg_database"
-                }
-            }
-        }
-        
-        stage('Build Web Frontend Image') {
-            steps {
-                script {
-                    sh "docker build -t ${DOCKER_HUB_REPO}:rpg_web_frontend ./rpg_web_frontend"
-                }
-            }
-        }
-        
-        stage('Build Content Creator Image') {
-            steps {
-                script {
-                    sh "docker build -t ${DOCKER_HUB_REPO}:rpg_content_creator ./rpg_content_creator"
-                }
-            }
-        }
-        
-        stage('Build Content API Image') {
-            steps {
-                script {
-                    sh "docker build -t ${DOCKER_HUB_REPO}:rpg_content_api ./rpg_content_api"
+
+                    // Log out from Docker Hub
+                    sh 'docker logout'
                 }
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                script {
-                    // Run database service
-                    sh "docker run -d --name rpg_database -e POSTGRES_DB=rpg -e POSTGRES_USER=rpg_user -e POSTGRES_PASSWORD=rpg_pass -p 5432:5432 ${DOCKER_HUB_REPO}:rpg_database"
-                    // Wait for database to start
-                    sleep 20
-                    // Run tests
-                    sh "docker run --rm --network=host ${DOCKER_HUB_REPO}:rpg_web_frontend python -m unittest discover -s tests"
-                    // Stop and remove the database container
-                    sh "docker stop rpg_database"
-                    sh "docker rm rpg_database"
-                }
-            }
-        }
+         // Log into Docker Hub
+        stage('Log into Docker Hub')  {
+             steps{
+                script  {
+                    echo "Logging into Docker Hub..."
+                 }
+             }
+         }
 
+        // Build the Database Image
+        stage('Build Database Image')  {
+            steps{
+                script  {
+                    echo "Building database image..."
+                 }
+             }
+         }
+
+        // Build the Web Frontend Image
+        stage('Build Web Frontend Image')  {
+            steps{
+                script  {
+                    echo "Building web frontend image..."
+                 }
+             }
+         }
+
+        // Build the Content Creator Image
+        stage('Build Content Creator Image')  {
+            steps{
+                script  {
+                    echo "Building content creator image..."
+                 }
+             }
+         }
+
+        // Build the Content API Image
+        stage('Build Content API Image')  {
+            steps{
+                script  {
+                    echo "Building content API image..."
+                 }
+             }
+         }
+
+         // Run Tests against the built Docker Images
+         stage('Run Tests')  {
+             steps{
+                script  {
+                    echo "Running tests..."
+
+                    // Spin up a database service with specified env vars.
+                    docker.image('mysql:latest').withEnv(['MYSQL_ROOT_PASSWORD=root', 'MYSQL_DATABASE=test']).run()
+
+                    // Run an interactive container for the duration of test suite's execution.
+                    docker.run('-e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=test --rm --name test-container -v $WORKSPACE:/home/mysql/ localtest.sh'
+                }
+             }
+         }
+
+        // Stop and Remove Database Container
+        stage('Stop and Remove Database Container')  {
+            steps{
+                script  {
+                    echo "Stopping and removing the database container..."
+                 }
+             }
+         }
+
+        // Push Docker Images to Docker Hub (uncomment if needed)
         /*
-        stage('Push Images') {
-            steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'DOCKER_HUB_CREDENTIALS') {
-                        def services = ['rpg_database', 'rpg_web_frontend', 'rpg_content_creator', 'rpg_content_api']
-                        services.each { service ->
-                            sh "docker tag ${DOCKER_HUB_REPO}:${service} ${DOCKER_HUB_REPO}:${service}-latest"
-                            sh "docker push ${DOCKER_HUB_REPO}:${service}-latest"
-                        }
-                    }
-                }
-            }
-        }
+        stage('Push Docker Images to Docker Hub')  {
+            steps{
+                script  {
+                    // Push all tags of repository
+                    docker.push(`$DOCKER_HUB_REPO:latest`)
+                    docker.push(`$DOCKER_ HUB_REPO:stable`)
+                 }
+             }
+         }
         */
     }
+
 }
