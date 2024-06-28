@@ -1,4 +1,5 @@
 # project_root/rpg_web_frontend/app/config.py
+import tempfile
 
 class Config:
     SQLALCHEMY_DATABASE_URI = 'postgresql://rpg_user:rpg_pass@rpg_database:5432/rpg'

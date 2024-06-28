@@ -1,5 +1,3 @@
-# project_root/rpg_web_frontend/app/__init__.py
-
 import logging
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -52,7 +50,7 @@ def create_app(config_class='app.config.Config'):
     # Import models after db is initialized to avoid circular imports
     with app.app_context():
         try:
-            from shared.models.entities import Player, Game, PlayerGame, Character, Quest
+            from shared.models.entities import Player, Game, PlayerGame, Character, Quest, Setting
             db.create_all()  # Ensure all tables are created
         except Exception as e:
             logger.error(f"Error importing models: {e}")

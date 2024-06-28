@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request, send_file
 from flask_login import login_required
 from app import db
-from app.models import Setting
+from shared.models import Setting
 from app.forms import SettingForm, BackupForm
 import json
 import io

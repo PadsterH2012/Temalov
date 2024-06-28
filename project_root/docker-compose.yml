@@ -3,8 +3,8 @@ version: '3.8'
 services:
   rpg_database:
     build:
-      context: ..
-      dockerfile: project_root/rpg_database/Dockerfile
+      context: ./rpg_database
+      dockerfile: Dockerfile
     image: padster2012/rpg_database:latest
     container_name: rpg_database
     environment:
@@ -33,29 +33,29 @@ services:
     ports:
       - "5000:5000"
 
-  rpg_content_creator:
-    build:
-      context: ..
-      dockerfile: project_root/rpg_content_creator/Dockerfile
-    image: padster2012/rpg_content_creator:latest
-    container_name: rpg_content_creator
-    depends_on:
-      rpg_database:
-        condition: service_healthy
-    ports:
-      - "8001:8001"
+  # rpg_content_creator:
+  #   build:
+  #     context: ./rpg_content_creator
+  #     dockerfile: Dockerfile
+  #   image: padster2012/rpg_content_creator:latest
+  #   container_name: rpg_content_creator
+  #   depends_on:
+  #     rpg_database:
+  #       condition: service_healthy
+  #   ports:
+  #     - "8001:8001"
 
-  rpg_content_api:
-    build:
-      context: ..
-      dockerfile: project_root/rpg_content_api/Dockerfile
-    image: padster2012/rpg_content_api:latest
-    container_name: rpg_content_api
-    depends_on:
-      rpg_database:
-        condition: service_healthy
-    ports:
-      - "8000:8000"
+  # rpg_content_api:
+  #   build:
+  #     context: ./rpg_content_api
+  #     dockerfile: Dockerfile
+  #   image: padster2012/rpg_content_api:latest
+  #   container_name: rpg_content_api
+  #   depends_on:
+  #     rpg_database:
+  #       condition: service_healthy
+  #   ports:
+  #     - "8000:8000"
 
 volumes:
   db_data:

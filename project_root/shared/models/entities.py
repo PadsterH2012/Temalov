@@ -1,10 +1,8 @@
-# project_root/shared/models/entities.py
-
-from datetime import datetime
-from flask_login import UserMixin
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
-from sqlalchemy.orm import relationship
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
+from datetime import datetime
+from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey
+from sqlalchemy.orm import relationship
 
 db = SQLAlchemy()
 
@@ -109,4 +107,19 @@ class Quest(db.Model):
             'name': self.name,
             'description': self.description,
             'objectives': self.objectives
+        }
+
+class Setting(db.Model):
+    id = Column(Integer, primary_key=True)
+    key = Column(String(100), unique=True, nullable=False)
+    value = Column(Text, nullable=False)
+
+    def __repr__(self):
+        return f'<Setting {self.key}>'
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'key': self.key,
+            'value': self.value
         }
