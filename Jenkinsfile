@@ -23,6 +23,7 @@ pipeline {
                     // Change to project-root directory
                     dir('project-root') {
                         // Build and push the Docker images using Docker Compose
+                        sh 'ls'
                         sh 'docker-compose  -f docker-compose.yml build'
                         sh 'docker-compose  -f docker-compose.yml push'
                     }
