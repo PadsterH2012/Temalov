@@ -11,6 +11,11 @@ services:
       POSTGRES_DB: rpg
       POSTGRES_USER: rpg_user
       POSTGRES_PASSWORD: rpg_pass
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rpg_user -d rpg"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     ports:
       - "5432:5432"
   
@@ -21,7 +26,8 @@ services:
     image: padster2012/rpg_web_frontend:latest
     container_name: rpg_web_frontend
     depends_on:
-      - rpg_database
+      rpg_database:
+        condition: service_healthy
     ports:
       - "5000:5000"
   
@@ -32,9 +38,10 @@ services:
     image: padster2012/rpg_content_creator:latest
     container_name: rpg_content_creator
     depends_on:
-      - rpg_database
+      rpg_database:
+        condition: service_healthy
     ports:
-      - "5001:5000"
+      - "8001:8001"
   
   rpg_content_api:
     build:
@@ -43,6 +50,10 @@ services:
     image: padster2012/rpg_content_api:latest
     container_name: rpg_content_api
     depends_on:
-      - rpg_database
+      rpg_database:
+        condition: service_healthy
     ports:
-      - "5002:5000"
+      - "8000:8000"
+
+volumes:
+  db_data:
