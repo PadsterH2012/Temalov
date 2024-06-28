@@ -7,7 +7,8 @@ class DatabaseTests(unittest.TestCase):
             dbname="rpg",
             user="rpg_user",
             password="rpg_pass",
-            host="localhost"
+            host="rpg_database",  # Use the service name defined in docker-compose.yml
+            port="5432"
         )
         self.cur = self.conn.cursor()
 
