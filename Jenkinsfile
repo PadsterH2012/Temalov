@@ -165,20 +165,18 @@ pipeline {
 
     post {
         success {
-            steps {
-                script {
-                    // Log in to Docker Hub
-                    sh "echo \$DOCKERHUB_CREDENTIALS_PSW | docker login -u \$DOCKERHUB_CREDENTIALS_USR --password-stdin"
+            script {
+                // Log in to Docker Hub
+                sh "echo \$DOCKERHUB_CREDENTIALS_PSW | docker login -u \$DOCKERHUB_CREDENTIALS_USR --password-stdin"
 
-                    // Change to project_root directory
-                    dir('project_root') {
-                        // Push the Docker images to Docker Hub using Docker Compose
-                        sh 'docker-compose push'
-                    }
-
-                    // Log out from Docker Hub
-                    sh 'docker logout'
+                // Change to project_root directory
+                dir('project_root') {
+                    // Push the Docker images to Docker Hub using Docker Compose
+                    sh 'docker-compose push'
                 }
+
+                // Log out from Docker Hub
+                sh 'docker logout'
             }
         }
     }
