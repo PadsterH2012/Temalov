@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Characters{% endblock %}
+
+{% block content %}
+  <h1>Characters</h1>
+  <form id="character-form">
+    <div class="form-group">
+      {% for character in characters.values() %}
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="{{ character['id'] }}" id="{{ character['id'] }}" name="selected_characters">
+          <label class="form-check-label" for="{{ character['id'] }}">
+            {{ character['name'] }}
+          </label>
+        </div>
+      {% endfor %}
+    </div>
+    <button type="button" class="btn btn-primary" onclick="saveCharacters()">Save Characters</button>
+  </form>
+
+  <script>
+    function saveCharacters() {
+        const selectedIds = Array.from(document.querySelectorAll('#character-form input:checked'))
+            .map(checkbox => parseInt(checkbox.value)) // Ensure IDs are integers
+            .filter(value => !isNaN(value)); // Filter out invalid values
+
+        console.log("Selected IDs:", selectedIds); // Log the selected IDs
+        
+        fetch('/upload/api/save_characters', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({character_ids: selectedIds})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Characters saved successfully!');
+            } else {
+                alert('Error saving characters: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while saving characters.');
+        });
+    }
+  </script>
+{% endblock %}

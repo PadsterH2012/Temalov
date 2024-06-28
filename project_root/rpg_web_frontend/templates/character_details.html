@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Character Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container mt-4">
+      <h1>Character Details</h1>
+      <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+          {{ form.name.label(class="form-control-label") }}
+          {{ form.name(class="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.sex.label(class="form-control-label") }}
+          {{ form.sex(class="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.age.label(class="form-control-label") }}
+          {{ form.age(class="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.traits.label(class="form-control-label") }}
+          {{ form.traits(class="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.behaviors.label(class="form-control-label") }}
+          {{ form.behaviors(class="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.background.label(class="form-control-label") }}
+          {{ form.background(class="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.book_title.label(class="form-control-label") }}
+          {{ form.book_title(class="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.author.label(class="form-control-label") }}
+          {{ form.author(class="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.dialogue_examples.label(class="form-control-label") }}
+          {{ form.dialogue_examples(class="form-control") }}
+        </div>
+        <div class="form-group">
+          {{ form.genre.label(class="form-control-label") }}
+          {{ form.genre(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-primary">Save Character</button>
+      </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

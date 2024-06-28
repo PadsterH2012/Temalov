@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+  <h1>Welcome, {{ current_user.username }}!</h1>
+  <p>You have successfully logged in to D-U-N-S-T-A-N.</p>
+  <p>Explore the site and start your adventure.</p>
+  <ul>
+    <li><a href="{{ url_for('upload.upload_page') }}">Upload PDF</a></li>
+    <li><a href="http://localhost:8001/health">Content Creator Health Check</a></li>
+    <li><a href="http://localhost:8000/api/characters">Characters API</a></li>
+    <li><a href="http://localhost:8000/api/quests">Quests API</a></li>
+  </ul>
+{% endblock %}
