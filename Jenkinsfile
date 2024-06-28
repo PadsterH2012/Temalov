@@ -7,6 +7,15 @@ pipeline {
     }
 
     stages {
+        stage('log into docker hub') {
+            steps {
+                script {
+                    // Log in to Docker Hub
+                    sh "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+                    }
+                }
+            }
+        }
         stage('Build Database Image') {
             steps {
                 script {
