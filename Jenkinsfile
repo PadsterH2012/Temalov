@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        // DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials')
-        DOCKER_HUB_REPO = 'your-dockerhub-username/repo-name'
+        DOCKER_HUB_CREDENTIALS = credentials('dockerhub-credentials-id')
+        DOCKER_HUB_REPO = 'padster2012/temalov'
     }
 
     stages {
