@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials')
+        // DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials')
         DOCKER_HUB_REPO = 'your-dockerhub-username/repo-name'
     }
 
@@ -55,6 +55,7 @@ pipeline {
             }
         }
 
+        /*
         stage('Push Images') {
             steps {
                 script {
@@ -68,5 +69,6 @@ pipeline {
                 }
             }
         }
+        */
     }
 }
