@@ -1,6 +1,4 @@
-# project_root/rpg_content_creator/run.py
-
-from app import create_app
+from extractor.app import create_app
 
 app = create_app()
 

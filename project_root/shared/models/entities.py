@@ -3,8 +3,10 @@ from flask_login import UserMixin
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey
 from sqlalchemy.orm import relationship
+from sqlalchemy.orm import sessionmaker
+from .database import db
 
-db = SQLAlchemy()
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=db.engine)
 
 class Player(UserMixin, db.Model):
     id = Column(Integer, primary_key=True)

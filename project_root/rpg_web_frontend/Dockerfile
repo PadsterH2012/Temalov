@@ -10,9 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY project_root/rpg_web_frontend ./
 COPY project_root/shared ./shared
 
-RUN ls -la ./shared
-
 EXPOSE 5000
 
-# Command to run the application
-CMD ["python", "run.py"]
+# Command to run the application with Gunicorn
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "run:app"]

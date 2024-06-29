@@ -9,7 +9,7 @@
   <body>
     <div class="container mt-4">
       <h1>Upload PDF</h1>
-      <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload.upload_page') }}">
+      <form method="POST" enctype="multipart/form-data" action="http://rpg_content_creator:8001/api/upload">
         {{ form.hidden_tag() }}
         <div class="form-group">
           <label for="file">Choose PDF file</label>

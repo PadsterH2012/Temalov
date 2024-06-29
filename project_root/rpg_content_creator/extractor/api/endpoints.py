@@ -6,7 +6,7 @@ from extractor.ai_agent_content_parser import (
     extract_text_from_pdf, extract_names, consolidate_names,
     process_character_details, generate_book_details, get_setting
 )
-from shared.models.models import Character, SessionLocal
+from shared.models.entities import Character, SessionLocal
 
 upload_bp = Blueprint('upload', __name__)
 

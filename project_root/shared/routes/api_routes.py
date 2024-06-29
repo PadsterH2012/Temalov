@@ -2,7 +2,8 @@
 
 import logging
 from flask import Blueprint, jsonify
-from shared.models.entities import db, Character, Quest
+from shared.models.entities import Character, Quest
+from shared.models.database import db
 
 api_bp = Blueprint('api', __name__)
 
