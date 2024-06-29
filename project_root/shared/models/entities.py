@@ -4,7 +4,7 @@ from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import sessionmaker
-from .database import db
+from app import db
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=db.engine)
 

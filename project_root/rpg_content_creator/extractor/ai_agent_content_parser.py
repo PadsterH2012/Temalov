@@ -8,7 +8,7 @@ import logging
 import requests
 
 from .settings import get_setting, get_ollama_settings  # Ensure correct imports
-from shared.models.database import db  # Use the Flask-SQLAlchemy db object
+from app import db  # Use the Flask-SQLAlchemy db object
 
 logger = logging.getLogger('app')
 

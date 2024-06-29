@@ -7,7 +7,7 @@ from extractor.ai_agent_content_parser import (
     process_character_details, generate_book_details, get_summary
 )
 from shared.models.entities import Character
-from shared.models.database import db
+from app import db
 from extractor.settings import get_setting
 from shared.routes.creator_routes import upload_bp
 import logging

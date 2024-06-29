@@ -3,7 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from shared.models import Player
 from app.forms import RegistrationForm, LoginForm
 from app import bcrypt
-from shared.models.database import db
+from app import db
 
 auth_bp = Blueprint('auth', __name__)
 
