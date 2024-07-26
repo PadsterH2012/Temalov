@@ -6,6 +6,8 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.orm import sessionmaker
 from app import db
 
+
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=db.engine)
 
 class Player(UserMixin, db.Model):

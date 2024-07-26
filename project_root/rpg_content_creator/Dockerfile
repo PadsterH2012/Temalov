@@ -1,6 +1,10 @@
+# project_root/rpg_content_creator/Dockerfile
+
 FROM python:3.9-slim
 
 WORKDIR /usr/src/app
+
+ENV PYTHONPATH=/usr/src/app:/usr/src/app/shared
 
 # Copy the requirements file into the container
 COPY project_root/rpg_content_creator/requirements.txt ./
@@ -13,4 +17,4 @@ COPY project_root/shared ./shared
 EXPOSE 8001
 
 # Command to run the application with Gunicorn
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8001", "run:app"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:8001", "app:app"]

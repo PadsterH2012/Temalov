@@ -1,3 +1,4 @@
+# project_root/rpg_web_frontend/run.py
 import sys
 import os
 
